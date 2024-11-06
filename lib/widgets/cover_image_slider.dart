@@ -2,13 +2,23 @@ import 'package:fake_store/widgets/container_image.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class CoverImageSlider extends StatelessWidget {
+class CoverImageSlider extends StatefulWidget {
   final List<String> coverImages;
 
-  CoverImageSlider({super.key, required this.coverImages});
+  const CoverImageSlider({super.key, required this.coverImages});
 
+  @override
+  State<CoverImageSlider> createState() => _CoverImageSliderState();
+}
+
+class _CoverImageSliderState extends State<CoverImageSlider> {
   final CarouselSliderController _carouselSliderController =
       CarouselSliderController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +31,7 @@ class CoverImageSlider extends StatelessWidget {
         children: [
           CarouselSlider(
             carouselController: _carouselSliderController,
-            items: coverImages.map((image) {
+            items: widget.coverImages.map((image) {
               return ContainerImage(
                 width: double.infinity,
                 height: 200,
@@ -32,7 +42,7 @@ class CoverImageSlider extends StatelessWidget {
               );
             }).toList(),
             options: CarouselOptions(
-              autoPlay: false,
+              autoPlay: true,
               enlargeCenterPage: true,
               viewportFraction: 1.0,
               aspectRatio: 2.0,
@@ -44,8 +54,9 @@ class CoverImageSlider extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: IconButton(
               onPressed: () => _carouselSliderController.previousPage(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.linear),
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.linear,
+              ),
               icon: const Icon(
                 Icons.arrow_back_ios,
                 color: Colors.white,
@@ -56,8 +67,9 @@ class CoverImageSlider extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: IconButton(
               onPressed: () => _carouselSliderController.nextPage(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.linear),
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.linear,
+              ),
               icon: const Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.white,

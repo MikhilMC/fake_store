@@ -1,58 +1,53 @@
 import 'package:fake_store/widgets/container_network_image.dart';
 import 'package:flutter/material.dart';
 
-class ProductContainer extends StatelessWidget {
+class ProductGridContainer extends StatelessWidget {
+  final int id;
   final String title;
   final double price;
+  final String imageUrl;
   final double rate;
   final int count;
-  final String imageUrl;
-  final String category;
 
-  const ProductContainer({
+  const ProductGridContainer({
     super.key,
+    required this.id,
     required this.title,
     required this.price,
     required this.rate,
     required this.count,
     required this.imageUrl,
-    required this.category,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
       width: double.infinity,
+      height: 300,
       decoration: BoxDecoration(
         border: Border.all(
           color: const Color.fromRGBO(138, 60, 122, 1),
-          style: BorderStyle.solid,
-          // strokeAlign: 2,
-          width: 3,
+          width: 3.0,
         ),
         borderRadius: const BorderRadius.all(
           Radius.circular(10),
         ),
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ContainerNetworkImage(
-            width: 150,
-            height: double.infinity,
+            width: double.infinity,
+            height: 340,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(10),
-              bottomLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
             ),
             imageUrl: imageUrl,
           ),
-          const SizedBox(
-            width: 20,
-          ),
-          SizedBox(
-            width: 210,
+          Padding(
+            padding: const EdgeInsets.all(10),
             child: Column(
-              // mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -61,45 +56,45 @@ class ProductContainer extends StatelessWidget {
                   maxLines: 1,
                   softWrap: false,
                   style: const TextStyle(
-                    fontSize: 30,
+                    fontSize: 25,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
+                ),
+                Text(
+                  "\$$price",
+                  style: const TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
                 ),
                 Row(
                   children: [
                     const Icon(
-                      Icons.stars_rounded,
+                      Icons.stars,
                       color: Colors.green,
                     ),
                     const SizedBox(
                       width: 10,
                     ),
                     Text(
-                      "$rate ($count) • \$$price",
+                      "$rate - ($count)",
                       style: const TextStyle(
+                        color: Colors.grey,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   ],
-                ),
-                const SizedBox(
-                  height: 80,
-                ),
-                Text(
-                  category,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey,
-                  ),
                 )
               ],
             ),
-          )
+          ),
         ],
       ),
     );

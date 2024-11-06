@@ -26,7 +26,7 @@ class ProductsList extends StatelessWidget {
               category: products[index]['category'].toString(),
             ),
             const SizedBox(
-              height: 10,
+              height: 20,
             )
           ],
         );
