@@ -18,7 +18,7 @@ class JeweleryProductsPage extends StatelessWidget {
             Navigator.of(context).pop();
           },
           icon: const Icon(
-            Icons.arrow_back,
+            Icons.arrow_circle_left_outlined,
             color: Colors.white,
             size: 30,
           ),
