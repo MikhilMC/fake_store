@@ -1,3 +1,4 @@
+import 'package:fake_store/widgets/expandable_text.dart';
 import 'package:flutter/material.dart';
 
 class SingleProductItemPage extends StatelessWidget {
@@ -143,13 +144,7 @@ class SingleProductItemPage extends StatelessWidget {
               const SizedBox(
                 height: 2,
               ),
-              Text(
-                description,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              ExpandableText(textContent: description),
             ],
           ),
         ),
