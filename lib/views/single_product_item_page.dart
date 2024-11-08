@@ -10,6 +10,7 @@ class SingleProductItemPage extends StatelessWidget {
   final String image;
   final double rate;
   final int count;
+  final String heroId;
 
   const SingleProductItemPage({
     super.key,
@@ -21,6 +22,7 @@ class SingleProductItemPage extends StatelessWidget {
     required this.image,
     required this.rate,
     required this.count,
+    required this.heroId,
   });
 
   @override
@@ -53,15 +55,18 @@ class SingleProductItemPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: const Color.fromRGBO(138, 60, 122, 1),
-                      width: 2,
+              Hero(
+                tag: heroId,
+                child: Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color.fromRGBO(138, 60, 122, 1),
+                        width: 2,
+                      ),
                     ),
+                    child: Image.network(image),
                   ),
-                  child: Image.network(image),
                 ),
               ),
               const SizedBox(

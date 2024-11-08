@@ -1,5 +1,6 @@
 import 'package:fake_store/widgets/container_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ProductContainer extends StatelessWidget {
   final int id;
@@ -9,7 +10,8 @@ class ProductContainer extends StatelessWidget {
   final int count;
   final String imageUrl;
   final String category;
-  final Function(int) onClick;
+  final Function(int, String) onClick;
+  final String heroId;
 
   const ProductContainer({
     super.key,
@@ -21,12 +23,13 @@ class ProductContainer extends StatelessWidget {
     required this.category,
     required this.onClick,
     required this.id,
+    required this.heroId,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => onClick(id),
+      onTap: () => onClick(id, heroId),
       child: Container(
         height: 200,
         width: double.infinity,
@@ -43,14 +46,22 @@ class ProductContainer extends StatelessWidget {
         ),
         child: Row(
           children: [
-            ContainerNetworkImage(
-              width: 150,
-              height: double.infinity,
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(10),
-                bottomLeft: Radius.circular(10),
+            Hero(
+              tag: heroId,
+              flightShuttleBuilder: (flightContext, animation, flightDirection,
+                  fromHeroContext, toHeroContext) {
+                return LoadingAnimationWidget.inkDrop(
+                    color: const Color.fromRGBO(138, 60, 122, 1), size: 10.0);
+              },
+              child: ContainerNetworkImage(
+                width: 150,
+                height: double.infinity,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
+                ),
+                imageUrl: imageUrl,
               ),
-              imageUrl: imageUrl,
             ),
             const SizedBox(
               width: 20,

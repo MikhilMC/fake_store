@@ -27,7 +27,8 @@ class ProductsGrid extends StatelessWidget {
           rate: rate.toDouble(),
           count: rating['count'] as int,
           imageUrl: products[index]['image'].toString(),
-          onClick: (int id) {
+          heroId: "hero-$index",
+          onClick: (int id, String heroId) {
             Map<String, dynamic> selectedItem =
                 products.firstWhere((element) => element['id'] == id);
             num price = selectedItem['price'];
@@ -45,6 +46,7 @@ class ProductsGrid extends StatelessWidget {
                   image: selectedItem['image'].toString(),
                   rate: rate.toDouble(),
                   count: rating['count'] as int,
+                  heroId: heroId,
                 ),
               ),
             );
