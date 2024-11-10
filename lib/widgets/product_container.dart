@@ -1,6 +1,6 @@
 import 'package:fake_store/widgets/container_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
+// import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ProductContainer extends StatelessWidget {
   final int id;
@@ -46,22 +46,15 @@ class ProductContainer extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Hero(
-              tag: heroId,
-              flightShuttleBuilder: (flightContext, animation, flightDirection,
-                  fromHeroContext, toHeroContext) {
-                return LoadingAnimationWidget.inkDrop(
-                    color: const Color.fromRGBO(138, 60, 122, 1), size: 10.0);
-              },
-              child: ContainerNetworkImage(
-                width: 150,
-                height: double.infinity,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  bottomLeft: Radius.circular(10),
-                ),
-                imageUrl: imageUrl,
+            ContainerNetworkImage(
+              width: 150,
+              height: double.infinity,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(10),
+                bottomLeft: Radius.circular(10),
               ),
+              imageUrl: imageUrl,
+              heroId: heroId,
             ),
             const SizedBox(
               width: 20,

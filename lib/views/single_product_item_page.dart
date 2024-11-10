@@ -55,18 +55,15 @@ class SingleProductItemPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Hero(
-                tag: heroId,
-                child: Center(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: const Color.fromRGBO(138, 60, 122, 1),
-                        width: 2,
-                      ),
+              Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: const Color.fromRGBO(138, 60, 122, 1),
+                      width: 2,
                     ),
-                    child: Image.network(image),
                   ),
+                  child: Hero(tag: heroId, child: Image.network(image)),
                 ),
               ),
               const SizedBox(

@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class ExpandableText extends StatefulWidget {
@@ -22,36 +23,44 @@ class _ExpandableTextState extends State<ExpandableText> {
     final String displayText = _isExpanded
         ? widget.textContent
         : widget.textContent.length > widget.maxCharacters
-            ? "${widget.textContent.substring(0, widget.maxCharacters)}.."
+            ? "${widget.textContent.substring(0, widget.maxCharacters)}..."
             : widget.textContent;
-    return Wrap(
-      textDirection: TextDirection.rtl,
-      children: [
-        Text(
-          displayText,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+
+    return RichText(
+      text: TextSpan(
+        children: [
+          TextSpan(
+            text: displayText,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
           ),
-        ),
-        // const SizedBox(height: 8.0),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              _isExpanded = !_isExpanded;
-            });
-          },
-          child: Text(
-            _isExpanded ? 'Show less' : 'Show more',
+          const WidgetSpan(
+            child: SizedBox(
+              width: 5,
+            ),
+          ),
+          TextSpan(
+            text: _isExpanded ? 'Show less' : 'Show more',
             style: const TextStyle(
               color: Colors.blue,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               decoration: TextDecoration.underline,
             ),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                setState(
+                  () {
+                    _isExpanded = !_isExpanded;
+                  },
+                );
+              },
           ),
-        )
-      ],
+        ],
+      ),
     );
   }
 }

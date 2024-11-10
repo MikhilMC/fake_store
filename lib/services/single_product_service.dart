@@ -20,7 +20,6 @@ Future<ProductModel> singleProduct({required int id}) async {
     );
 
     final Map<String, dynamic> decoded = jsonDecode(resp.body);
-    print(resp.body);
     if (resp.statusCode == 200) {
       final response = ProductModel.fromJson(decoded);
       return response;

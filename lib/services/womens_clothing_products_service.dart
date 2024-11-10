@@ -5,12 +5,21 @@ import 'package:fake_store/models/product_model.dart';
 import 'package:fake_store/app_constants/app_urls.dart';
 import 'package:http/http.dart' as http;
 
-Future<ProductModel> womensClothingProductsList(
-    {required bool needToSort}) async {
+Future<ProductModel> womensClothingProductsList({
+  required bool needToSort,
+  int? limit,
+}) async {
   try {
-    // Construct the URL with query parameters
+    Map<String, dynamic> params = {};
+    if (needToSort) {
+      params['sort'] = 'desc';
+    }
+    if (limit != null) {
+      params['limit'] = limit;
+    }
+
     final url = Uri.parse(AppUrls.womensClothingProducts).replace(
-      queryParameters: needToSort ? {'sort': 'desc'} : {},
+      queryParameters: params,
     );
 
     final resp = await http.get(
@@ -21,7 +30,6 @@ Future<ProductModel> womensClothingProductsList(
     );
 
     final Map<String, dynamic> decoded = jsonDecode(resp.body);
-    print(resp.body);
     if (resp.statusCode == 200) {
       final response = ProductModel.fromJson(decoded);
       return response;
