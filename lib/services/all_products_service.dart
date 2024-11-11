@@ -5,7 +5,7 @@ import 'package:fake_store/models/product_model.dart';
 import 'package:fake_store/app_constants/app_urls.dart';
 import 'package:http/http.dart' as http;
 
-Future<ProductModel> allProductsList({
+Future<List<ProductModel>> allProductsList({
   required bool needToSort,
   int? limit,
 }) async {
@@ -14,8 +14,8 @@ Future<ProductModel> allProductsList({
     if (needToSort) {
       params['sort'] = 'desc';
     }
-    if (limit != null) {
-      params['limit'] = limit;
+    if (limit != null && limit > 0) {
+      params['limit'] = limit.toString();
     }
     // Construct the URL with query parameters
     final url = Uri.parse(AppUrls.allProducts).replace(
@@ -29,9 +29,11 @@ Future<ProductModel> allProductsList({
       },
     );
 
-    final Map<String, dynamic> decoded = jsonDecode(resp.body);
     if (resp.statusCode == 200) {
-      final response = ProductModel.fromJson(decoded);
+      final List<dynamic> decoded = jsonDecode(resp.body);
+      final response =
+          decoded.map((item) => ProductModel.fromJson(item)).toList();
+
       return response;
     } else {
       throw Exception('Failed to load response');

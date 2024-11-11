@@ -1,12 +1,10 @@
+import 'package:fake_store/models/product_model.dart';
+import 'package:fake_store/services/electronics_products_service.dart';
 import 'package:fake_store/widgets/products_grid.dart';
 import 'package:flutter/material.dart';
 
 class ElectronicsProductsPage extends StatelessWidget {
-  final List<Map<String, dynamic>> electronicsProducts;
-  const ElectronicsProductsPage({
-    super.key,
-    required this.electronicsProducts,
-  });
+  const ElectronicsProductsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +32,35 @@ class ElectronicsProductsPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: ProductsGrid(products: electronicsProducts),
+        child: FutureBuilder<List<ProductModel>>(
+          future: electronicsProductsList(needToSort: false),
+          builder: (context, snapshot) {
+            // Loading State
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            // Error State
+            if (snapshot.hasError) {
+              return Center(
+                child: Text("Error: ${snapshot.error}"),
+              );
+            }
+
+            // Empty Response data array
+            if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(
+                child: Text("No products found"),
+              );
+            }
+
+            // Success State
+            List<ProductModel> electronicsProducts = snapshot.data!.toList();
+            return ProductsGrid(products: electronicsProducts);
+          },
+        ),
       ),
     );
   }

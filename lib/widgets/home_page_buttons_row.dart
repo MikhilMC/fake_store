@@ -8,20 +8,10 @@ import 'package:flutter/material.dart';
 
 class HomePageButtonsRow extends StatelessWidget {
   final List<Map<String, String>> buttons;
-  final List<Map<String, dynamic>> products;
-  final List<Map<String, dynamic>> electronicsProducts;
-  final List<Map<String, dynamic>> jeweleryProducts;
-  final List<Map<String, dynamic>> mensClothingProducts;
-  final List<Map<String, dynamic>> womensClothingProducts;
 
   const HomePageButtonsRow({
     super.key,
     required this.buttons,
-    required this.products,
-    required this.electronicsProducts,
-    required this.jeweleryProducts,
-    required this.mensClothingProducts,
-    required this.womensClothingProducts,
   });
 
   @override
@@ -41,45 +31,35 @@ class HomePageButtonsRow extends StatelessWidget {
                   case "All":
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => AllProductsPage(
-                          products: products,
-                        ),
+                        builder: (context) => const AllProductsPage(),
                       ),
                     );
                     break;
                   case "Electronics":
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => ElectronicsProductsPage(
-                          electronicsProducts: electronicsProducts,
-                        ),
+                        builder: (context) => const ElectronicsProductsPage(),
                       ),
                     );
                     break;
                   case "Jewelery":
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => JeweleryProductsPage(
-                          jeweleryProducts: jeweleryProducts,
-                        ),
+                        builder: (context) => const JeweleryProductsPage(),
                       ),
                     );
                     break;
                   case "Men's Clothing":
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => MensClothingPage(
-                          mensClothingProducts: mensClothingProducts,
-                        ),
+                        builder: (context) => const MensClothingPage(),
                       ),
                     );
                     break;
                   case "Women's Clothing":
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => WomensClothingPage(
-                          womensClothingProducts: womensClothingProducts,
-                        ),
+                        builder: (context) => const WomensClothingPage(),
                       ),
                     );
                     break;

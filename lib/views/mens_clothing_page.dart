@@ -1,9 +1,10 @@
+import 'package:fake_store/models/product_model.dart';
+import 'package:fake_store/services/mens_clothing_products_service.dart';
 import 'package:fake_store/widgets/products_grid.dart';
 import 'package:flutter/material.dart';
 
 class MensClothingPage extends StatelessWidget {
-  final List<Map<String, dynamic>> mensClothingProducts;
-  const MensClothingPage({super.key, required this.mensClothingProducts});
+  const MensClothingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,35 @@ class MensClothingPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: ProductsGrid(products: mensClothingProducts),
+        child: FutureBuilder<List<ProductModel>>(
+          future: mensClothingProductsList(needToSort: false),
+          builder: (context, snapshot) {
+            // Loading State
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            // Error State
+            if (snapshot.hasError) {
+              return Center(
+                child: Text("Error: ${snapshot.error}"),
+              );
+            }
+
+            // Empty Response data array
+            if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(
+                child: Text("No products found"),
+              );
+            }
+
+            // Success State
+            List<ProductModel> mensClothingProducts = snapshot.data!.toList();
+            return ProductsGrid(products: mensClothingProducts);
+          },
+        ),
       ),
     );
   }

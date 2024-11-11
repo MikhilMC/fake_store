@@ -1,4 +1,4 @@
-const String baseUrl = "https://fakestoreapi.com/";
+const String baseUrl = "https://fakestoreapi.com";
 
 class AppUrls {
   static const String allProducts = "$baseUrl/products";
