@@ -1,8 +1,8 @@
-import 'package:fake_store/views/all_products_page.dart';
-import 'package:fake_store/views/electronics_products_page.dart';
-import 'package:fake_store/views/jewelery_products_page.dart';
-import 'package:fake_store/views/mens_clothing_page.dart';
-import 'package:fake_store/views/womens_clothing_page.dart';
+import 'package:fake_store/screens/all_products/view/all_products_page.dart';
+import 'package:fake_store/screens/electronics_products/view/electronics_products_page.dart';
+import 'package:fake_store/screens/jewelery_products/view/jewelery_products_page.dart';
+import 'package:fake_store/screens/mens_clothing_products/view/mens_clothing_page.dart';
+import 'package:fake_store/screens/womens_clothing_products/view/womens_clothing_page.dart';
 import 'package:fake_store/widgets/home_page_button.dart';
 import 'package:flutter/material.dart';
 

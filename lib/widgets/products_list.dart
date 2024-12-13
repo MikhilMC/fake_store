@@ -1,6 +1,6 @@
 import 'package:fake_store/models/product_model.dart';
 import 'package:fake_store/services/all_products_service.dart';
-import 'package:fake_store/views/single_product_item_page.dart';
+import 'package:fake_store/screens/single_product/view/single_product_item_page.dart';
 import 'package:fake_store/widgets/product_container.dart';
 import 'package:flutter/material.dart';
 
