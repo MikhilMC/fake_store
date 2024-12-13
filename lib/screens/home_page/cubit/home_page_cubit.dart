@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:fake_store/screens/home_page/models/home_page_product.dart';
+import 'package:fake_store/screens/home_page/models/home_page_product/home_page_product.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:fake_store/app_constants/app_urls.dart';

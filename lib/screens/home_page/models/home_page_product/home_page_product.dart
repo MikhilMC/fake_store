@@ -1,6 +1,6 @@
 import 'package:fake_store/utils/utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:fake_store/screens/home_page/models/rating.dart';
+import 'package:fake_store/screens/home_page/models/rating/rating.dart';
 
 part 'home_page_product.freezed.dart';
 part 'home_page_product.g.dart';
