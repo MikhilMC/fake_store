@@ -1,11 +1,12 @@
-import 'package:fake_store/models/product_model.dart';
+import 'package:fake_store/screens/product_list_page/models/product/product.dart';
+import 'package:fake_store/screens/product_list_page/models/product_rating/product_rating.dart';
 import 'package:fake_store/screens/single_product/view/single_product_item_page.dart';
 import 'package:fake_store/widgets/product_grid_container.dart';
 import 'package:flutter/material.dart';
 
-class ProductsGrid extends StatelessWidget {
-  final List<ProductModel> products;
-  const ProductsGrid({super.key, required this.products});
+class ProductsGridBloc extends StatelessWidget {
+  final List<Product> products;
+  const ProductsGridBloc({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +19,14 @@ class ProductsGrid extends StatelessWidget {
       ),
       itemCount: products.length,
       itemBuilder: (BuildContext context, int index) {
-        Rating? rating = products[index].rating;
+        ProductRating? rating = products[index].rating;
         double? price = products[index].price;
         return ProductGridContainer(
-          id: products[index].id as int,
+          id: products[index].id,
           title: products[index].title.toString(),
-          price: price!.toDouble(),
-          rate: rating!.rate!.toDouble(),
-          count: rating.count as int,
+          price: price.toDouble(),
+          rate: rating.rate.toDouble(),
+          count: rating.count,
           imageUrl: products[index].image.toString(),
           heroId: "hero-$index",
           onClick: (int id, String heroId) {

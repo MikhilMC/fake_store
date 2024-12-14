@@ -1,8 +1,4 @@
-import 'package:fake_store/screens/all_products/view/all_products_page.dart';
-import 'package:fake_store/screens/electronics_products/view/electronics_products_page.dart';
-import 'package:fake_store/screens/jewelery_products/view/jewelery_products_page.dart';
-import 'package:fake_store/screens/mens_clothing_products/view/mens_clothing_page.dart';
-import 'package:fake_store/screens/womens_clothing_products/view/womens_clothing_page.dart';
+import 'package:fake_store/screens/product_list_page/views/product_list_page.dart';
 import 'package:fake_store/widgets/home_page_button.dart';
 import 'package:flutter/material.dart';
 
@@ -31,35 +27,50 @@ class HomePageButtonsRow extends StatelessWidget {
                   case "All":
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const AllProductsPage(),
+                        builder: (context) => const ProductListPage(
+                          pageType: "all",
+                          pageTitle: "All Products",
+                        ),
                       ),
                     );
                     break;
                   case "Electronics":
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const ElectronicsProductsPage(),
+                        builder: (context) => const ProductListPage(
+                          pageType: "electronics",
+                          pageTitle: "Electronics Products",
+                        ),
                       ),
                     );
                     break;
                   case "Jewelery":
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const JeweleryProductsPage(),
+                        builder: (context) => const ProductListPage(
+                          pageType: "jewelery",
+                          pageTitle: "Jewelery Products",
+                        ),
                       ),
                     );
                     break;
                   case "Men's Clothing":
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const MensClothingPage(),
+                        builder: (context) => const ProductListPage(
+                          pageType: "men's clothing",
+                          pageTitle: "Men's Clothing Products",
+                        ),
                       ),
                     );
                     break;
                   case "Women's Clothing":
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const WomensClothingPage(),
+                        builder: (context) => const ProductListPage(
+                          pageType: "women's clothing",
+                          pageTitle: "Women's Clothing Products",
+                        ),
                       ),
                     );
                     break;

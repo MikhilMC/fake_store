@@ -1,9 +1,9 @@
-import 'package:fake_store/models/product_model.dart';
-import 'package:fake_store/services/single_product_service.dart';
+import 'package:fake_store/screens/single_product/bloc/single_product_bloc.dart';
 import 'package:fake_store/widgets/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SingleProductItemPage extends StatelessWidget {
+class SingleProductItemPage extends StatefulWidget {
   final int id;
   final String heroId;
 
@@ -12,6 +12,17 @@ class SingleProductItemPage extends StatelessWidget {
     required this.id,
     required this.heroId,
   });
+
+  @override
+  State<SingleProductItemPage> createState() => _SingleProductItemPageState();
+}
+
+class _SingleProductItemPageState extends State<SingleProductItemPage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<SingleProductBloc>().add(SingleProductFetched(id: widget.id));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,39 +41,29 @@ class SingleProductItemPage extends StatelessWidget {
         ),
         title: const Text(
           "Product Item Details",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-          ),
+        ),
+        titleTextStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 30,
+          fontWeight: FontWeight.bold,
         ),
       ),
-      body: FutureBuilder<ProductModel>(
-        future: singleProduct(id: id),
-        builder: (context, snapshot) {
-          // Loading State
-          if (snapshot.connectionState == ConnectionState.waiting) {
+      body: BlocBuilder<SingleProductBloc, SingleProductState>(
+        builder: (context, state) {
+          if (state is SingleProductFailure) {
+            return Center(
+              child: Text(state.errorMessage),
+            );
+          }
+
+          if (state is! SingleProductSuccess) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
 
-          // Error State
-          if (snapshot.hasError) {
-            return Center(
-              child: Text("Error: ${snapshot.error}"),
-            );
-          }
+          final data = state.product;
 
-          // Empty Response data array
-          if (!snapshot.hasData || snapshot.data == null) {
-            return const Center(
-              child: Text("No product found"),
-            );
-          }
-
-          // Success State
-          ProductModel product = snapshot.data!;
           return Padding(
             padding: const EdgeInsets.all(10),
             child: SingleChildScrollView(
@@ -78,8 +79,8 @@ class SingleProductItemPage extends StatelessWidget {
                         ),
                       ),
                       child: Hero(
-                        tag: heroId,
-                        child: Image.network(product.image!),
+                        tag: widget.heroId,
+                        child: Image.network(data.image),
                       ),
                     ),
                   ),
@@ -87,7 +88,7 @@ class SingleProductItemPage extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    product.title!,
+                    data.title,
                     style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -97,7 +98,7 @@ class SingleProductItemPage extends StatelessWidget {
                     height: 15,
                   ),
                   Text(
-                    "\$${product.price}",
+                    "\$${data.price}",
                     style: const TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.bold,
@@ -120,7 +121,7 @@ class SingleProductItemPage extends StatelessWidget {
                         width: 10,
                       ),
                       Text(
-                        product.category!.toUpperCase(),
+                        data.category.toUpperCase(),
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 25,
@@ -141,7 +142,7 @@ class SingleProductItemPage extends StatelessWidget {
                         width: 10,
                       ),
                       Text(
-                        "${product.rating!.rate!} (${product.rating!.count})",
+                        "${data.rating.rate} (${data.rating.count})",
                         style: const TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
@@ -163,7 +164,7 @@ class SingleProductItemPage extends StatelessWidget {
                   const SizedBox(
                     height: 2,
                   ),
-                  ExpandableText(textContent: product.description.toString()),
+                  ExpandableText(textContent: data.description.toString()),
                 ],
               ),
             ),

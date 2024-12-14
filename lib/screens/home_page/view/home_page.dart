@@ -99,11 +99,15 @@ class _HomePageState extends State<HomePage> {
             BlocBuilder<HomePageCubit, HomePageState>(
               builder: (context, state) {
                 return state.when(
-                  initial: () => const Center(
-                    child: Text("Initializing..."),
+                  initial: () => const SliverToBoxAdapter(
+                    child: Center(
+                      child: Text("Initializing..."),
+                    ),
                   ),
-                  loading: () => const Center(
-                    child: CircularProgressIndicator(),
+                  loading: () => const SliverToBoxAdapter(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   ),
                   success: (products) {
                     return SliverList.separated(
@@ -136,8 +140,10 @@ class _HomePageState extends State<HomePage> {
                       itemCount: products.length,
                     );
                   },
-                  error: (errorMessage) => Center(
-                    child: Text(errorMessage),
+                  error: (errorMessage) => SliverToBoxAdapter(
+                    child: Center(
+                      child: Text(errorMessage),
+                    ),
                   ),
                 );
               },

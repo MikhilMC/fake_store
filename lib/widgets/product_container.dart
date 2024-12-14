@@ -31,7 +31,7 @@ class ProductContainer extends StatelessWidget {
     return GestureDetector(
       onTap: () => onClick(id, heroId),
       child: Container(
-        height: 200,
+        height: 210,
         width: double.infinity,
         decoration: BoxDecoration(
           border: Border.all(

@@ -27,7 +27,7 @@ class HomePageCubit extends Cubit<HomePageState> {
         params['limit'] = limit.toString();
       }
       // Construct the URL with query parameters
-      final url = Uri.parse(AppUrls.allProducts).replace(
+      final url = Uri.parse(AppUrls.getUrl("all")).replace(
         queryParameters: params,
       );
 
