@@ -28,7 +28,7 @@ class ProductsGridBloc extends StatelessWidget {
           rate: rating.rate.toDouble(),
           count: rating.count,
           imageUrl: products[index].image.toString(),
-          heroId: "hero-$index",
+          heroId: "hero-${products[index].category}-$index",
           onClick: (int id, String heroId) {
             Navigator.of(context).push(
               MaterialPageRoute(

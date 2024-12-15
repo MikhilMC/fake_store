@@ -132,7 +132,8 @@ class _HomePageState extends State<HomePage> {
                             );
                           },
                           id: products[index].id,
-                          heroId: "hero-${products[index].id}",
+                          heroId:
+                              "hero-${products[index].category}-${products[index].id}",
                         );
                       },
                       separatorBuilder: (_, __) => const SizedBox(
