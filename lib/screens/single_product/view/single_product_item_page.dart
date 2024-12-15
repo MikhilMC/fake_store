@@ -1,8 +1,10 @@
 import 'package:fake_store/screens/single_product/bloc/single_product_bloc.dart';
+import 'package:fake_store/widgets/category_widget.dart';
 import 'package:fake_store/widgets/error_message.dart';
 import 'package:fake_store/widgets/expandable_text.dart';
 import 'package:fake_store/widgets/loading_widget.dart';
 import 'package:fake_store/widgets/not_found.dart';
+import 'package:fake_store/widgets/ratings_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -114,48 +116,13 @@ class _SingleProductItemPageState extends State<SingleProductItemPage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    children: [
-                      const Text(
-                        "Category",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        data.category.toUpperCase(),
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25,
-                        ),
-                      ),
-                    ],
-                  ),
+                  CategoryWidget(category: data.category),
                   const SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.stars_rounded,
-                        color: Colors.green,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "${data.rating.rate} (${data.rating.count})",
-                        style: const TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
+                  RatingsWidget(
+                    rate: data.rating.rate,
+                    count: data.rating.count,
                   ),
                   const SizedBox(
                     height: 20,
