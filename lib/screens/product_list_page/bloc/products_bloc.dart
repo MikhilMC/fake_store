@@ -35,10 +35,14 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
 
         if (resp.statusCode == 200) {
           final List<dynamic> decoded = jsonDecode(resp.body);
-          final products =
-              decoded.map((item) => Product.fromJson(item)).toList();
+          if (decoded.isEmpty) {
+            emit(const ProductsState.empty());
+          } else {
+            final products =
+                decoded.map((item) => Product.fromJson(item)).toList();
 
-          emit(ProductsState.success(products));
+            emit(ProductsState.success(products));
+          }
         } else {
           emit(const ProductsState.error('Failed to load response'));
         }

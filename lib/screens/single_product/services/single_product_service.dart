@@ -6,7 +6,7 @@ import 'package:fake_store/screens/single_product/models/single_product/single_p
 import 'package:http/http.dart' as http;
 
 class SingleProductService {
-  Future<SingleProduct> singleProduct({required int id}) async {
+  Future<SingleProduct?> singleProduct({required int id}) async {
     try {
       // Construct the URL with query parameters
       final url = Uri.parse("${AppUrls.getUrl("single product")}/$id").replace(
@@ -20,8 +20,9 @@ class SingleProductService {
         },
       );
 
-      print("Status code: ${resp.statusCode}");
-      print("Response Body: ${resp.body}");
+      if (resp.statusCode == 404) {
+        return null;
+      }
 
       final Map<String, dynamic> decoded = jsonDecode(resp.body);
       if (resp.statusCode == 200) {

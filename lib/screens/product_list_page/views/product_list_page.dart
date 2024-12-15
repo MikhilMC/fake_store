@@ -1,4 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:fake_store/widgets/error_message.dart';
+import 'package:fake_store/widgets/loading_widget.dart';
+import 'package:fake_store/widgets/not_found.dart';
 import 'package:fake_store/widgets/products_grid_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,21 +59,19 @@ class _ProductListPageState extends State<ProductListPage> {
       body: BlocBuilder<ProductsBloc, ProductsState>(
         builder: (context, state) {
           if (state is ProductsStateError) {
-            return Center(
-              child: Text(state.errorMessage),
+            return ErrorMessage(
+              errorMessage: state.errorMessage,
             );
           }
 
           if (state is ProductsStateEmpty) {
-            return const Center(
-              child: Text("Products list empty"),
+            return const NotFound(
+              notFoundMessage: "Products list empty",
             );
           }
 
           if (state is! ProductsStateSuccess) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const LoadingWidget();
           }
 
           return Padding(

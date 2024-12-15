@@ -1,7 +1,10 @@
 import 'package:fake_store/screens/home_page/cubit/home_page_cubit.dart';
 import 'package:fake_store/screens/single_product/view/single_product_item_page.dart';
 import 'package:fake_store/widgets/cover_image_slider.dart';
+import 'package:fake_store/widgets/error_message.dart';
 import 'package:fake_store/widgets/home_page_buttons_row.dart';
+import 'package:fake_store/widgets/loading_widget.dart';
+import 'package:fake_store/widgets/not_found.dart';
 import 'package:fake_store/widgets/product_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -105,9 +108,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   loading: () => const SliverToBoxAdapter(
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
+                    child: LoadingWidget(),
                   ),
                   success: (products) {
                     return SliverList.separated(
@@ -141,9 +142,10 @@ class _HomePageState extends State<HomePage> {
                     );
                   },
                   error: (errorMessage) => SliverToBoxAdapter(
-                    child: Center(
-                      child: Text(errorMessage),
-                    ),
+                    child: ErrorMessage(errorMessage: errorMessage),
+                  ),
+                  empty: () => const SliverToBoxAdapter(
+                    child: NotFound(notFoundMessage: "No products found"),
                   ),
                 );
               },

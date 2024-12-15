@@ -1,5 +1,8 @@
 import 'package:fake_store/screens/single_product/bloc/single_product_bloc.dart';
+import 'package:fake_store/widgets/error_message.dart';
 import 'package:fake_store/widgets/expandable_text.dart';
+import 'package:fake_store/widgets/loading_widget.dart';
+import 'package:fake_store/widgets/not_found.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -51,15 +54,19 @@ class _SingleProductItemPageState extends State<SingleProductItemPage> {
       body: BlocBuilder<SingleProductBloc, SingleProductState>(
         builder: (context, state) {
           if (state is SingleProductFailure) {
-            return Center(
-              child: Text(state.errorMessage),
+            return ErrorMessage(
+              errorMessage: state.errorMessage,
+            );
+          }
+
+          if (state is SingleProductNotFound) {
+            return const NotFound(
+              notFoundMessage: "No product found",
             );
           }
 
           if (state is! SingleProductSuccess) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const LoadingWidget();
           }
 
           final data = state.product;

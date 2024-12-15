@@ -16,7 +16,11 @@ class SingleProductBloc extends Bloc<SingleProductEvent, SingleProductState> {
           final product = await singleProductService.singleProduct(
             id: event.id,
           );
-          emit(SingleProductSuccess(product: product));
+          if (product == null) {
+            emit(SingleProductNotFound());
+          } else {
+            emit(SingleProductSuccess(product: product));
+          }
         } catch (e) {
           emit(SingleProductFailure(e.toString()));
         }

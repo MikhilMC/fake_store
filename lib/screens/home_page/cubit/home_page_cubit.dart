@@ -40,10 +40,14 @@ class HomePageCubit extends Cubit<HomePageState> {
 
       if (resp.statusCode == 200) {
         final List<dynamic> decoded = jsonDecode(resp.body);
-        final products =
-            decoded.map((item) => HomePageProduct.fromJson(item)).toList();
+        if (decoded.isEmpty) {
+          emit(const HomePageState.empty());
+        } else {
+          final products =
+              decoded.map((item) => HomePageProduct.fromJson(item)).toList();
 
-        emit(HomePageState.success(products));
+          emit(HomePageState.success(products));
+        }
       } else {
         emit(const HomePageState.error('Failed to load response'));
       }

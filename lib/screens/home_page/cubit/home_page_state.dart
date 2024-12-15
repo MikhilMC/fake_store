@@ -7,4 +7,5 @@ class HomePageState with _$HomePageState {
   const factory HomePageState.success(List<HomePageProduct> products) =
       _Success;
   const factory HomePageState.error(String errorMessage) = _Error;
+  const factory HomePageState.empty() = _Empty;
 }

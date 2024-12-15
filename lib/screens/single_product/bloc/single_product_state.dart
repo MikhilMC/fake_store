@@ -18,3 +18,5 @@ final class SingleProductFailure extends SingleProductState {
 
   SingleProductFailure(this.errorMessage);
 }
+
+final class SingleProductNotFound extends SingleProductState {}
