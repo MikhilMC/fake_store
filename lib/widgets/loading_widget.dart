@@ -8,7 +8,7 @@ class LoadingWidget extends StatelessWidget {
     return const Center(
       child: CircularProgressIndicator(
         valueColor: AlwaysStoppedAnimation<Color>(
-          Color.fromARGB(138, 60, 122, 1),
+          Color.fromRGBO(138, 60, 122, 1),
         ),
       ),
     );
